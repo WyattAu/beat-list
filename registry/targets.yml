@@ -1,0 +1,139 @@
+# Beat-list registry — scored targets
+# schema: id, class (fork|study|watch|infra), upstream, score (rubric /15),
+#         status, estate-play, added
+# Higher score = higher priority. infra-critical targets bypass the queue.
+
+targets:
+  - id: mcp-integrity-sentinel
+    class: infra
+    upstream: null
+    score: 15
+    infra_critical: true
+    status: pitch
+    estate-play: >
+      CRITICAL INFRASTRUCTURE GAP, validated by four incidents in Q3-Q4 2026:
+      Deadbugz (runtime-gated MCP metadata poisoning via GitHub PRs),
+      Mini Shai-Hulud npm worm (631 packages, MCP server among them),
+      LiteLLM PyPI startup-hook compromise, GHAPPIER valid-signature attack.
+      Every advisory recommends the same missing controls: tool-definition
+      hash pinning, MCP-server allowlisting, continuous tools/list monitoring.
+      No cohesive OSS tool ships them. Estate arms: tamper-audit (hash chains
+      for tool-definition snapshots), policy-kit (fail-closed allowlists),
+      auditlog (queryable trail), mcp-doctor (existing health gate, WyattAu/mcp-doctor).
+      Build: mcp-config scanner (PR/diff IoC scanning for server entries),
+      tool-definition hash pinning + mid-session mutation alerts,
+      policy-kit allowlist enforcement. Name candidate: mcp-sentinel
+      (extends WyattAu/mcp-doctor).
+    added: "2026-11-01"
+    sources:
+      - https://www.pillar.security/blog/deadbugz-currently-active-mcp-supply-chain-campaign
+      - https://github.com/advisories/GHSA-p6wc-j7x7-ff3v
+      - https://orca.security/resources/research/ghappier-loader-npm-supply-chain-attack/
+      - https://www.microsoft.com/en-us/security/blog/2026/10/23/inside-the-litellm-1-107-0-supply-chain-compromise-credential-theft-through-python-startup-hooks/
+
+  - id: voicestudio-intel
+    class: study
+    upstream: debpalash/VoiceStudio
+    score: 8
+    status: intel-for-nightjar
+    estate-play: >
+      Trending +12.2k/week (2026-10-31 snapshot) — validates nightjar M3's
+      voice-suite thesis. Study feature set (TTS/clone/studio UX) before
+      building nightjar's TTS module; do not fork (nightjar owns the
+      dictation+TTS+teleprompter integration wedge).
+    added: "2026-11-01"
+
+  - id: draco-fetch-escalation
+    class: study
+    upstream: 0xchasercat/draco
+    score: 8
+    status: intel-for-outrider
+    estate-play: >
+      Rust single-binary scraper with tiered escalation (stealth TLS/JA4
+      fetch -> in-process V8 hydration -> real browser fallback) and
+      Firecrawl-compatible API. Directly informs outrider R3's Rust hot
+      path: study the tiered-escalation pattern and JA4 mimicry; outrider
+      differentiates on read-only agent channels + honest doctor, not on
+      scraping-service features.
+    added: "2026-11-01"
+
+  - id: design-skill-genre
+    class: watch
+    upstream: pbakaus/impeccable
+    score: 6
+    status: watching
+    estate-play: >
+      Anti-AI-slop design skills are a genre (hallmark 44k, impeccable 98k,
+      taste-skill 107k, ai-design-skills). Estate angle exists (pediment
+      design tokens crate could power deterministic detector rules), but the
+      genre is crowded and moving fast. Watch for consolidation; revisit if
+      a wedge emerges. Candidate name if entered: pediment-skill.
+    added: "2026-11-01"
+
+  - id: lightpanda-aileron-validation
+    class: watch
+    upstream: lightpanda-io/browser
+    score: 5
+    status: watching
+    estate-play: >
+      Zig headless browser for AI, 39k stars — validates aileron's
+      Servo-for-agents thesis (aileron is estate orphan; outrider R4 is its
+      consumer). Lightpanda is server-side scraping focused; aileron is
+      keyboard-driven interactive. Watch, do not compete.
+    added: "2026-11-01"
+
+  - id: agent-memory-genre
+    class: watch
+    upstream: thedotmack/claude-mem
+    score: 4
+    status: watching
+    estate-play: >
+      claude-mem 108k, superpowers 310k, ECC 294k — agent memory and
+      methodology frameworks are the durable genre. Estate's memory MCP +
+      caveman skills already occupy the local-first niche; distribution
+      (marketplaces, plugins) is the study target, not the memory engine.
+    added: "2026-11-01"
+
+  - id: rea-fork-dissect
+    class: fork
+    upstream: morluto/rea
+    score: 13
+    status: active
+    estate-play: >
+      Target now 415k stars (+37.9k/wEEK as of 2026-11-01) — dissect's wedge
+      (sandboxed providers, tamper-evident evidence, signed releases) grows
+      MORE valuable as the target grows: trust story scales with supply-chain
+      attacks on the category. Active fork. See WyattAu/dissect.
+    added: "2026-10-31"
+
+  - id: handy-fork-nightjar
+    class: fork
+    upstream: cjpais/Handy
+    score: 12
+    status: active
+    estate-play: >
+      v0.1.0 tagged 2026-11-01; R0 closed CI-verified. M1 (Wayland-first,
+      empirical) next. VoiceStudio trending validates the M3 suite thesis.
+      See WyattAu/nightjar, docs/M1-WAYLAND-PLAN.md.
+    added: "2026-10-31"
+
+  - id: agent-reach-fork-outrider
+    class: fork
+    upstream: Panniantong/Agent-Reach
+    score: 12
+    status: active
+    estate-play: >
+      fetch-kit 0.2.3 published + wired; doctor --strict shipped; rust
+      fetcher CI-gated. Draco escalation study informs R3. See WyattAu/outrider.
+    added: "2026-10-31"
+
+  - id: supoclip-fork-offcut
+    class: fork
+    upstream: FujiwaraChoki/supoclip
+    score: 11
+    status: active
+    estate-play: >
+      whisper default flipped; offcut-cut render worker pins worker-kit
+      (acceptance-tested 2.000s clip, CI job added). M2 E2E runbook written.
+      See WyattAu/offcut, docs/M2-E2E-RUNBOOK.md.
+    added: "2026-10-31"
