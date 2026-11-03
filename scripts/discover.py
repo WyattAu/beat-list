@@ -24,11 +24,8 @@ import urllib.request
 
 SOURCES = {
     "githot-weekly": "https://githot.dev/en/weekly",
-    "gitstock-daily": "https://gitstock.org/trending/daily",
-    "gh-advisories-malicious": (
-        "https://api.github.com/advisories?"
-        "type=malicious&per_page=30&sort=published"
-    ),
+    # gitstock.org dropped /trending/daily (400) — use dated URLs if needed
+    "gh-advisories-recent": "https://api.github.com/advisories?per_page=30&sort=published",
 }
 
 UA = {"User-Agent": "WyattAu/beat-list discovery sweep (+https://github.com/WyattAu/beat-list)"}
@@ -50,13 +47,17 @@ def main() -> int:
             digest["sources"][name] = {"error": str(exc)}
             continue
         if "api.github.com" in url and body.lstrip().startswith("["):
+            # type=malicious is rejected server-side (422); filter client-side
             advisories = []
             for adv in json.loads(body):
                 summary = adv.get("summary", "")
-                if any(k in summary.lower() for k in ("mcp", "agent", "claude", "ai ")):
+                classification = (adv.get("type") or "").lower()
+                mal = "malicious" in classification or "malicious code" in summary.lower()
+                if mal or any(k in summary.lower() for k in ("mcp", "agent", "claude")):
                     advisories.append(
                         {
                             "id": adv.get("ghsa_id"),
+                            "type": classification,
                             "package": (adv.get("vulnerabilities") or [{}])[0].get("package", {}).get("name"),
                             "summary": summary[:200],
                         }
