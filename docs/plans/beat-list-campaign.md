@@ -1,7 +1,7 @@
 # beat-list-campaign
 
 status: active
-updated: 2026-11-02  rev: 3
+updated: 2026-11-03  rev: 4
 
 ## State
 | # | Task | Status | Evidence | Next |
@@ -10,17 +10,18 @@ updated: 2026-11-02  rev: 3
 | 2 | mcp-integrity-sentinel scored infra-critical | done | targets.yml score 15/15 | build approved |
 | 3 | mcp-sentinel v0.1.0 (scan/pin/verify/verify-chain) | done | release v0.1.0 + SHA256SUMS on GH | remote probing (SSE/HTTP) |
 | 4 | mcp-sentinel CI drift gate | done | ci.yml mutation roundtrip green on runners | auditlog export |
-| 5 | mcp-guard Action into 4 forks | done | mcp-guard.yml in nightjar/outrider/offcut/dissect | watch daemon |
-| 6 | nightjar R0 + transcription verified on-box | done | docs/M1-WAYLAND-PLAN.md smoke results | M1 voice tests (user) |
+| 5 | mcp-guard Action into 4 forks | done | mcp-guard.yml in nightjar/outrider/offcut/dissect | adoption tracking |
+| 6 | nightjar R0 + transcription verified on-box | done | docs/M1-WAYLAND-PLAN.md smoke results + headless RTF 0.22x | M1 voice tests (user) |
+| 6b | mcp-sentinel v0.1.1 watch daemon | done | commit 8fed567, tag pushed | auditlog export |
 | 7 | offcut zero-key transcription E2E | done | docs/M2-E2E-RUNBOOK.md 2026-11-02 entry | selection-stage model decision (user) |
 | 8 | offcut full-pipeline E2E | blocked | docs/M2-E2E-RUNBOOK.md final finding (0.5B schema ceiling) | user: ROCm GPU / llama3.2:3b+3600s / flash-tier key |
 | 9 | dissect v0.1.0 tag | blocked | docs/RELEASE.md written | user: GPG key fingerprint |
 | 10 | outrider R2 platform depth | queued | — | after flagship M1 |
 
 ## Next action
-Nightjar M1 voice tests (user at desktop; app running, ydotool verified,
-injection proven). Meanwhile: mcp-sentinel watch daemon (continuous
-tools/list monitoring — the Deadbugz detection control).
+Nightjar M1 voice tests (user at desktop; app running, ydotool daemon +
+socket verified end to end). Meanwhile: mcp-sentinel auditlog export +
+remote-server probing, or the offcut selection-stage model decision.
 
 ## Blocked
 - offcut full-pipeline LLM stage: model capacity on CPU (0.5B schema
@@ -42,6 +43,12 @@ tools/list monitoring — the Deadbugz detection control).
 - 2026-11-02: campaign opened; 4 forks created+seeded; beat-list created
   (registry, rubric, sweep script, MCP threat model); mcp-sentinel v0.1.0
   built+released; sync kit live in cachyos_sys_dotfiles.
+- 2026-11-03: mcp-guard Action into 4 forks; campaign ledger created;
+  mcp-sentinel v0.1.1 (watch daemon, drift detection); nightjar local
+  build green (CI-verified + on-box); offcut zero-key transcription E2E
+  passed; offcut full-stack attempt triple-confirmed model-capacity finding.
+- 2026-11-04/06: nightjar local binary rebuilt post-restarts; M1 smoke
+  catalog entries 1-2 resolved; voice tests handed to user.
 - 2026-11-01: 4 forks created (nightjar/outrider/offcut/dissect); sync kit
   delivered (opencode V2 config template, skills, audit gates in
   cachyos_sys_dotfiles); fetch-kit 0.2.3 published; offcut whisper default
