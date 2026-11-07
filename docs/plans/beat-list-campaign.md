@@ -14,7 +14,7 @@ updated: 2026-11-03  rev: 4
 | 6 | nightjar R0 + transcription verified on-box | done | docs/M1-WAYLAND-PLAN.md smoke results + headless RTF 0.22x | M1 voice tests (user) |
 | 6b | mcp-sentinel v0.1.1 watch daemon | done | commit 8fed567, tag pushed | auditlog export |
 | 7 | offcut zero-key transcription E2E | done | docs/M2-E2E-RUNBOOK.md 2026-11-02 entry | selection-stage model decision (user) |
-| 8 | offcut full-pipeline E2E | blocked | docs/M2-E2E-RUNBOOK.md final finding (0.5B schema ceiling) | user: ROCm GPU / llama3.2:3b+3600s / flash-tier key |
+| 8 | offcut full-pipeline E2E | blocked | docs/M2-E2E-RUNBOOK.md: triple-confirmed CPU model-capacity ceiling (tinyllama timeout, qwen0.5b + llama3.2:3b schema failures) | user: ROCm GPU / llama3.2:3b+3600s / flash-tier key |
 | 9 | dissect v0.1.0 tag | blocked | docs/RELEASE.md written | user: GPG key fingerprint |
 | 10 | outrider R2 platform depth | queued | — | after flagship M1 |
 
@@ -43,6 +43,9 @@ remote-server probing, or the offcut selection-stage model decision.
 - 2026-11-02: campaign opened; 4 forks created+seeded; beat-list created
   (registry, rubric, sweep script, MCP threat model); mcp-sentinel v0.1.0
   built+released; sync kit live in cachyos_sys_dotfiles.
+- 2026-11-04: offcut full-stack attempt: transcription zero-key PROVEN
+  in-container; LLM selection triple-confirmed CPU-bound (runbook); worker
+  image rebuilt; port-conflict override shipped.
 - 2026-11-03: mcp-guard Action into 4 forks; campaign ledger created;
   mcp-sentinel v0.1.1 (watch daemon, drift detection); nightjar local
   build green (CI-verified + on-box); offcut zero-key transcription E2E
